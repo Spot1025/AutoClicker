@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2E2E2E"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Header -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Auto-Clicker Settings"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Tap Count Settings -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tap Count Range"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <EditText
+                android:id="@+id/tap_min_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Min"
+                android:inputType="number"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/darker_gray"
+                android:backgroundTint="@android:color/white"
+                android:layout_marginEnd="8dp" />
+
+            <EditText
+                android:id="@+id/tap_max_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Max"
+                android:inputType="number"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/darker_gray"
+                android:backgroundTint="@android:color/white" />
+
+        </LinearLayout>
+
+        <!-- Delay Settings -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delay Range (ms)"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <EditText
+                android:id="@+id/delay_min_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Min"
+                android:inputType="number"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/darker_gray"
+                android:backgroundTint="@android:color/white"
+                android:layout_marginEnd="8dp" />
+
+            <EditText
+                android:id="@+id/delay_max_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Max"
+                android:inputType="number"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/darker_gray"
+                android:backgroundTint="@android:color/white" />
+
+        </LinearLayout>
+
+        <!-- Auto-Cycle Run Duration -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Auto-Cycle Run Duration (sec)"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <EditText
+                android:id="@+id/run_min_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Min"
+                android:inputType="number"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/darker_gray"
+                android:backgroundTint="@android:color/white"
+                android:layout_marginEnd="8dp" />
+
+            <EditText
+                android:id="@+id/run_max_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Max"
+                android:inputType="number"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/darker_gray"
+                android:backgroundTint="@android:color/white" />
+
+        </LinearLayout>
+
+        <!-- Auto-Cycle Pause Duration -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Auto-Cycle Pause Duration (sec)"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="24dp">
+
+            <EditText
+                android:id="@+id/pause_min_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Min"
+                android:inputType="number"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/darker_gray"
+                android:backgroundTint="@android:color/white"
+                android:layout_marginEnd="8dp" />
+
+            <EditText
+                android:id="@+id/pause_max_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Max"
+                android:inputType="number"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/darker_gray"
+                android:backgroundTint="@android:color/white" />
+
+        </LinearLayout>
+
+        <!-- Anti-Detection Features -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Anti-Detection Features"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:layout_marginBottom="8dp" />
+
+        <Switch
+            android:id="@+id/jitter_toggle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Coordinate Jitter (±5px)"
+            android:textColor="@android:color/white"
+            android:checked="true"
+            android:layout_marginBottom="8dp" />
+
+        <Switch
+            android:id="@+id/pressure_toggle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pressure Variance"
+            android:textColor="@android:color/white"
+            android:checked="true"
+            android:layout_marginBottom="8dp" />
+
+        <Switch
+            android:id="@+id/drift_toggle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Target Drift"
+            android:textColor="@android:color/white"
+            android:checked="false"
+            android:layout_marginBottom="32dp" />
+
+        <!-- Target Crosshairs -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Drag Targets to Position"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- We'll use absolute positioning for targets in the actual activity -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:background="#1E1E1E"
+            android:layout_marginBottom="24dp">
+
+            <TextView
+                android:id="@+id/target1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:text="⊕"
+                android:textSize="32sp"
+                android:textColor="@android:color/holo_red_light"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/target2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:text="⊕"
+                android:textSize="32sp"
+                android:textColor="@android:color/holo_blue_light"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/target3"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:text="⊕"
+                android:textSize="32sp"
+                android:textColor="@android:color/holo_green_light"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/target4"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:text="⊕"
+                android:textSize="32sp"
+                android:textColor="@android:color/holo_orange_light"
+                android:gravity="center" />
+
+        </FrameLayout>
+
+        <!-- Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/save_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="SAVE"
+                android:backgroundTint="@android:color/holo_green_dark"
+                android:layout_marginEnd="8dp" />
+
+            <Button
+                android:id="@+id/close_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="CLOSE"
+                android:backgroundTint="@android:color/darker_gray" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
