@@ -1,90 +1,67 @@
-package com.github.nestorm001.autoclicker
+package com.nestorm001.autoclicker
 
-import android.accessibilityservice.AccessibilityServiceInfo
-import android.annotation.TargetApi
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.support.v7.app.AppCompatActivity
-import android.view.accessibility.AccessibilityManager
-import com.github.nestorm001.autoclicker.service.FloatingClickService
-import com.github.nestorm001.autoclicker.service.autoClickService
-import kotlinx.android.synthetic.main.activity_main.*
-
-
-private const val PERMISSION_CODE = 110
+import android.widget.Button
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
-
-    private var serviceIntent: Intent? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        button.setOnClickListener {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N
-                    || Settings.canDrawOverlays(this)) {
-                serviceIntent = Intent(this@MainActivity,
-                        FloatingClickService::class.java)
-                startService(serviceIntent)
-                onBackPressed()
-            } else {
-                askPermission()
-                shortToast("You need System Alert Window Permission to do this")
+
+        findViewById<Button>(R.id.btn_start).setOnClickListener {
+            if (checkPermissions()) {
+                startFloatingBubble()
             }
+        }
+
+        findViewById<Button>(R.id.btn_settings).setOnClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java))
         }
     }
 
-    private fun checkAccess(): Boolean {
-        val string = getString(R.string.accessibility_service_id)
-        val manager = getSystemService(Context.ACCESSIBILITY_SERVICE) as AccessibilityManager
-        val list = manager.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_GENERIC)
-        for (id in list) {
-            if (string == id.id) {
-                return true
+    private fun checkPermissions(): Boolean {
+        // Check overlay permission
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!Settings.canDrawOverlays(this)) {
+                Toast.makeText(this, "Please grant overlay permission", Toast.LENGTH_LONG).show()
+                val intent = Intent(
+                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:$packageName")
+                )
+                startActivity(intent)
+                return false
             }
         }
-        return false
-    }
 
-    override fun onResume() {
-        super.onResume()
-        val hasPermission = checkAccess()
-        "has access? $hasPermission".logd()
-        if (!hasPermission) {
+        // Check accessibility service
+        if (!isAccessibilityServiceEnabled()) {
+            Toast.makeText(this, "Please enable Accessibility Service", Toast.LENGTH_LONG).show()
             startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+            return false
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
-                && !Settings.canDrawOverlays(this)) {
-            askPermission()
-        }
+
+        return true
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
-    private fun askPermission() {
-        val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                Uri.parse("package:$packageName"))
-        startActivityForResult(intent, PERMISSION_CODE)
+    private fun isAccessibilityServiceEnabled(): Boolean {
+        val service = "${packageName}/.AutoClickAccessibilityService"
+        val enabledServices = Settings.Secure.getString(
+            contentResolver,
+            Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
+        )
+        return enabledServices?.contains(service) == true
     }
 
-    override fun onDestroy() {
-        serviceIntent?.let {
-            "stop floating click service".logd()
-            stopService(it)
-        }
-        autoClickService?.let {
-            "stop auto click service".logd()
-            it.stopSelf()
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) return it.disableSelf()
-            autoClickService = null
-        }
-        super.onDestroy()
-    }
-
-    override fun onBackPressed() {
-        moveTaskToBack(true)
+    private fun startFloatingBubble() {
+        val intent = Intent(this, FloatingBubbleService::class.java)
+        startService(intent)
+        Toast.makeText(this, "Floating bubble started!", Toast.LENGTH_SHORT).show()
     }
 }
