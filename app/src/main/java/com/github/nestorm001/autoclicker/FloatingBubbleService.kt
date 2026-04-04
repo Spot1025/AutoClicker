@@ -1,4 +1,4 @@
-package com.autoclicker
+package com.nestorm001.autoclicker
 
 import android.app.Service
 import android.content.Intent
@@ -29,7 +29,7 @@ class FloatingBubbleService : Service() {
     
     private var lastTapTime = 0L
     private var tapCount = 0
-    private val doubleTapThreshold = 300L // ms
+    private val doubleTapThreshold = 300L
     
     private var isRunning = false
     private var isAutoCycle = false
@@ -92,7 +92,6 @@ class FloatingBubbleService : Service() {
                     initialTouchX = event.rawX
                     initialTouchY = event.rawY
                     
-                    // Start long press detection
                     longPressHandler = Runnable {
                         openSettings()
                     }
@@ -105,7 +104,6 @@ class FloatingBubbleService : Service() {
                     val deltaX = (event.rawX - initialTouchX).toInt()
                     val deltaY = (event.rawY - initialTouchY).toInt()
                     
-                    // If moved significantly, cancel long press and tap
                     if (abs(deltaX) > 10 || abs(deltaY) > 10) {
                         longPressHandler?.let { v.removeCallbacks(it) }
                         tapCount = 0
@@ -124,12 +122,10 @@ class FloatingBubbleService : Service() {
                     val deltaX = (event.rawX - initialTouchX).toInt()
                     val deltaY = (event.rawY - initialTouchY).toInt()
                     
-                    // Only register tap if not moved
                     if (abs(deltaX) < 10 && abs(deltaY) < 10) {
                         handleTap()
                     }
                     
-                    // Snap to edge
                     snapToEdge(params)
                     true
                 }
@@ -143,11 +139,9 @@ class FloatingBubbleService : Service() {
         val currentTime = System.currentTimeMillis()
         
         if (currentTime - lastTapTime < doubleTapThreshold) {
-            // Double tap detected
             toggleAutoCycle()
             tapCount = 0
         } else {
-            // Single tap (wait to see if double tap comes)
             tapCount = 1
             bubbleView?.postDelayed({
                 if (tapCount == 1) {
@@ -161,7 +155,7 @@ class FloatingBubbleService : Service() {
     }
     
     private fun toggleManual() {
-        if (isAutoCycle) return // Don't interfere with auto-cycle
+        if (isAutoCycle) return
         
         isRunning = !isRunning
         
