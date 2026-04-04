@@ -1,4 +1,4 @@
-package com.autoclicker
+package com.nestorm001.autoclicker
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -6,12 +6,12 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 data class ClickConfig(
-    val targets: List<Pair<Float, Float>>, // 4 tap coordinates
+    val targets: List<Pair<Float, Float>>,
     val tapMin: Int,
     val tapMax: Int,
-    val delayMin: Int, // milliseconds
+    val delayMin: Int,
     val delayMax: Int,
-    val autoCycleRunMin: Int, // seconds
+    val autoCycleRunMin: Int,
     val autoCycleRunMax: Int,
     val autoCyclePauseMin: Int,
     val autoCyclePauseMax: Int,
@@ -86,7 +86,6 @@ object ConfigManager {
                 enableDrift = json.getBoolean("enableDrift")
             )
         } else {
-            // Default config
             ClickConfig(
                 targets = listOf(
                     Pair(270f, 585f),
