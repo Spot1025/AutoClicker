@@ -236,4 +236,33 @@ class FloatingBubbleService : Service() {
         super.onDestroy()
         bubbleView?.let { windowManager?.removeView(it) }
     }
+private fun createBubbleView(): View {
+    val layout = android.widget.RelativeLayout(this).apply {
+        layoutParams = android.view.ViewGroup.LayoutParams(
+            200, // 80dp in pixels
+            200
+        )
+        setBackgroundColor(android.graphics.Color.parseColor("#808080"))
+        setPadding(20, 20, 20, 20)
+        elevation = 8f
+    }
+    
+    val textView = TextView(this).apply {
+        id = R.id.bubble_text
+        text = "⊕"
+        textSize = 24f
+        setTextColor(android.graphics.Color.WHITE)
+        gravity = android.view.Gravity.CENTER
+    }
+    
+    val imageView = ImageView(this).apply {
+        id = R.id.bubble_icon
+        visibility = View.GONE
+    }
+    
+    layout.addView(textView)
+    layout.addView(imageView)
+    
+    return layout
+}
 }
