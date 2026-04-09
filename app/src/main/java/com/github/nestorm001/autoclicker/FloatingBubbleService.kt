@@ -1,4 +1,4 @@
-package com.nestorm001.autoclicker
+package com.github.nestorm001.autoclicker
 
 import android.app.Service
 import android.content.Intent
