@@ -5,10 +5,10 @@ plugins {
 
 android {
     compileSdk 34
-    namespace 'com.nestorm001.autoclicker'
+    namespace 'com.github.nestorm001.autoclicker'
     
     defaultConfig {
-        applicationId "com.nestorm001.autoclicker"
+        applicationId "com.github.nestorm001.autoclicker"
         minSdkVersion 24
         targetSdkVersion 34
         versionCode 1
